@@ -28,17 +28,25 @@ with open("recipes.txt", "rt") as recipe:
 def get_shop_list_by_dishes(dishes, person_count):
 
     output = {}
-
+    order = {}
+    counter = 0 
     for dish in dishes:
         for k, v in cook_book.items():
             if k == dish:
                 for ingr_info in v:
 
+                    if ingr_info['ingredient_name'] in output:
+                        counter += 1
+                        
                     order = {'measure': ingr_info['measure'], 'quantity': (int(person_count) * int(ingr_info['quantity']))}
+                    if counter > 0 and ingr_info['ingredient_name'] in output:#stop zdezi - proverka chto ingredient uzhe v output a ne v order
+                        order.update({'quantity': output[ingr_info['ingredient_name']].get('quantity', 0) + (int(person_count) * int(ingr_info['quantity']))})
+
                     output[ingr_info['ingredient_name']] = order
+                    
     return output
 
 
-#return [(person_count* ingredient_) for ingredient_ in v if is_prime(i)]
+#return [(person_count* ingredient_) for ingredient_ in v if ]
 
-pprint(get_shop_list_by_dishes(['Grilled Potato', 'Omelette'], 2))
+pprint(get_shop_list_by_dishes(['Omelette', 'Fajitos', 'Omelette'], 2))
