@@ -1,3 +1,5 @@
+################################ COOK_BOOK
+
 from pprint import pprint
 
 cook_book = {}
@@ -50,3 +52,4 @@ def get_shop_list_by_dishes(dishes, person_count):
 #return [(person_count* ingredient_) for ingredient_ in v if ]
 
 pprint(get_shop_list_by_dishes(['Omelette', 'Fajitos', 'Omelette'], 2))
+
